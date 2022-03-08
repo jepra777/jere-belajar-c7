@@ -56,7 +56,8 @@ class AuthController {
             if (!isPasswordMatch) return res.status(409).json({ message: "Password salah" })
             const access_token = await generateToken({
                 id: user.id,
-                email: user.email
+                email: user.email,
+                role: user.role
             })
             res.cookie("UserId", user.id, {
                 httpOnly: true
@@ -64,9 +65,13 @@ class AuthController {
             res.cookie("access_token", access_token, {
                 httpOnly: true
             })
+            res.cookie("role", user.role, {
+                httpOnly: true
+            })
             return res.status(200).json({
                 id: user.id,
                 username: user.username,
+                role: user.role,
                 message: `user ${username}, berhasil login`
             })
         } catch (error) {
