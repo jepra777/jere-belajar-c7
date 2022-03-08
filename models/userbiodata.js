@@ -17,17 +17,17 @@ module.exports = (sequelize, DataTypes) => {
   UserBiodata.init({
     name: DataTypes.STRING,
     gender: {
-      types: DataTypes.ENUM,
+      type: DataTypes.ENUM,
       values: ["male", "female", "null"],
       validate: {
-        isIn: [["male", "female", "null"]]
+        isIn: [["male", "female", "null"]],
       }
     },
     dob: DataTypes.DATE,
     status: DataTypes.STRING,
-    UserId:{
+    UserId: {
       type: DataTypes.INTEGER,
-      validate:{
+      validate: {
         notEmpty: true
       }
     }
